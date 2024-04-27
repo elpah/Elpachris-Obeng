@@ -16,13 +16,20 @@ app.get("/photos", async (req: Request, res: Response) => {
       "https://www.flickr.com/services/feeds/photos_public.gne",
       { params }
     );
-    const images: FlickrUseData = response.data.items.map(
-      (item: FlickrPhotoData) => ({
-        title: item.title,
-        link: item.link,
-        media: item.media && item.media.m ? item.media.m : "",
-        author: item.author,
-      })
+    const images: FlickrUseData[] = response.data.items.map(
+      (item: FlickrPhotoData) => {
+        let author = item.author;
+        if (author.includes("(") && author.includes(")")) {
+          author = author.split('"')[1];
+        }
+
+        return {
+          title: item.title,
+          link: item.link,
+          media: item.media && item.media.m ? item.media.m : "",
+          author,
+        };
+      }
     );
     res.json(images);
   } catch (error) {
