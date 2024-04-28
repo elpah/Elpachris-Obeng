@@ -1,18 +1,12 @@
+import { ImageCardProps } from '../types';
 
-type ImageCardProps={
-    imgSrc:string;
-    title:string;
-    author:string;
-    link:string;
-}
-
-export default function ImageCard({imgSrc,title,author,link}:ImageCardProps) {
+export default function ImageCard({media,title,author,link}:ImageCardProps) {
     return (
         <div className="shadow-md my-5 rounded-lg overflow-hidden bg-white w-full max-w-xs ">
         <div className="overflow-hidden h-2/3">
           <img
             className="w-full h-full object-cover transition-transform duration-200 transform hover:scale-105 "
-            src={imgSrc}
+            src={media}
             alt={title}
           />
         </div>
