@@ -3,6 +3,8 @@ import ImageCard from "@/components/imageCard";
 import { ImageCardProps } from "../types";
 
 import Nav from "@/components/nav";
+import LoadingSpinner from "@/components/loadingSpinner";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -32,12 +34,9 @@ export default function page({
 
       setImagesArray(response.data);
       setLoading(false);
-
-      if (response.data.length === 0) {
-        setError(`No images found for the keyword ${searchParams.keyword}`);
-      } else {
-        setError("");
-      }
+      response.data.length === 0
+        ? setError(`No images found for the keyword ${searchParams.keyword}`)
+        : setError("");
     } catch (error) {
       setLoading(false);
       setError("Failed to fetch images from Flicker. Please try again");
@@ -51,8 +50,10 @@ export default function page({
   return (
     <>
       <Nav />
-      {loading && <h1 className="text-center mt-4">Loading...</h1>}
-      {error && <h1 className="text-red-600 text-xl text-center mt-10">{error}</h1>}
+      {loading && <LoadingSpinner />}
+      {error && (
+        <h1 className="text-red-600 text-xl text-center mt-10">{error}</h1>
+      )}
       {imagesArray.length === 0 && !loading && !error && (
         <h1 className="text-center mt-4">No images found</h1>
       )}

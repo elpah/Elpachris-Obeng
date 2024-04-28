@@ -1,8 +1,10 @@
+import { RingLoader } from 'react-spinners';
 
-export default function loadingSpinner() {
+export default function LoadingSpinner() {
   return (
     <div className="flex justify-center items-center h-screen">
-    <div className="spinner border-4 border-t-4 border-gray-200 h-12 w-12 rounded-full animate-spin"></div>
-  </div>
-  )
-}
+      <RingLoader color={'#123abc'} size={100} />
+    </div>
+  );
+};
+
