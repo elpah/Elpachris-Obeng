@@ -11,25 +11,17 @@ app.get("/photos", async (req: Request, res: Response) => {
   keyword
     ? (params = { format: "json", nojsoncallback: 1, tags: keyword })
     : (params = { format: "json", nojsoncallback: 1 });
-  try {
+ try {
     const response = await axios.get(
       "https://www.flickr.com/services/feeds/photos_public.gne",
       { params }
     );
     const images: FlickrUseData[] = response.data.items.map(
-      (item: FlickrPhotoData) => {
-        let author = item.author;
-        if (author.includes("(") && author.includes(")")) {
-          author = author.split('"')[1];
-        }
-
-        return {
-          title: item.title,
-          link: item.link,
-          media: item.media && item.media.m ? item.media.m : "",
-          author,
-        };
-      }
+      (item: FlickrPhotoData) => ({
+        title: item.title,
+        link: item.link,
+        media: item.media && item.media.m ? item.media.m : "",
+      })
     );
     res.json(images);
   } catch (error) {
