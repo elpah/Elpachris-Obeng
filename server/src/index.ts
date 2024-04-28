@@ -38,7 +38,6 @@ interface FlickrUseData {
   title: string;
   link: string;
   media: string;
-  author: string;
 }
 interface FlickrPhotoData {
   title: string;
