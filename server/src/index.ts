@@ -17,23 +17,15 @@ app.get("/photos", async (req: Request, res: Response) => {
       { params }
     );
     const images: FlickrUseData[] = response.data.items.map(
-      (item: FlickrPhotoData) => {
-        let author = item.author;
-        if (author.includes("(") && author.includes(")")) {
-          author = author.split('"')[1];
-        }
-
-        return {
-          title: item.title,
-          link: item.link,
-          media: item.media && item.media.m ? item.media.m : "",
-          author,
-        };
-      }
+      (item: FlickrPhotoData) => ({
+        title: item.title,
+        link: item.link,
+        media: item.media && item.media.m ? item.media.m : "",
+      })
     );
     res.json(images);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ error: "Error processing data from flickr" });
   }
 });
@@ -46,7 +38,6 @@ interface FlickrUseData {
   title: string;
   link: string;
   media: string;
-  author: string;
 }
 interface FlickrPhotoData {
   title: string;
