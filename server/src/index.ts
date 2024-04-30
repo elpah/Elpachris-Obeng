@@ -25,7 +25,6 @@ app.get("/photos", async (req: Request, res: Response) => {
     );
     res.json(images);
   } catch (error) {
-    // console.error(error);
     res.status(500).json({ error: "Error processing data from flickr" });
   }
 });
