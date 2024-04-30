@@ -17,8 +17,9 @@ export default function page({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
-  const params = new URLSearchParams();
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+  const params = new URLSearchParams();
   if (typeof searchParams.keyword === "string") {
     params.append("keyword", searchParams.keyword);
   }
@@ -28,7 +29,7 @@ export default function page({
       setLoading(true);
       setError("");
 
-      const response = await axios.get<any>("http://localhost:5000/photos", {
+      const response = await axios.get(`${BASE_URL}`, {
         params: searchParams,
       });
 
