@@ -1,4 +1,4 @@
-s# Flickr Feed Viewer and Search Web Application
+# Flickr Feed Viewer and Search Web Application
 
 Flickr Feed Viewer is a web application that allows users to browse through Flickr's public feeds and search for images based on keywords. It is built with Node.js, Express, TypeScript for the backend, and Next.js for the frontend. This application also utilizes Tailwind CSS for styling.
 
