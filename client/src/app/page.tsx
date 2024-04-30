@@ -62,7 +62,7 @@ export default function page({
         {imagesArray.map((image, index) => (
           <ImageCard
             key={index}
-            title={image.title}
+            title={image.title.length > 15 ? `${image.title.substring(0, 15)}...` : image.title}
             media={image.media}
             link={image.link}
           />
